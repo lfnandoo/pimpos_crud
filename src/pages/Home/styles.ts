@@ -6,18 +6,6 @@ export const Container = styled.View`
   background-color: #eff2f7;
 `;
 
-export const Header = styled.View`
-  padding: 5px;
-  height: 15%;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-
-  background-color: #457be2;
-`;
-
-export const Image = styled.Image``;
-
 export const Button = styled.TouchableOpacity`
   height: 45px;
   align-items: center;

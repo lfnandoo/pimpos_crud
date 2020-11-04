@@ -19,6 +19,9 @@ const Card: React.FC = () => {
             <Styles.NameText>Luiz Miguel Ramos</Styles.NameText>
             <Styles.Text>1 ano, 2 meses e 15 dias</Styles.Text>
             <Styles.Text>15/07/2020</Styles.Text>
+            <Styles.Text>26Kg</Styles.Text>
+            <Styles.Text>0,66</Styles.Text>
+            <Styles.Text>16,32</Styles.Text>
           </Styles.ModalContent>
         </Styles.View>
       </Styles.Modal>

@@ -30,18 +30,20 @@ export const Text = styled.Text`
 export const Modal = styled.Modal``;
 
 export const View = styled.View`
-  background-color: rgba(100, 100, 100, 0.6);
   flex: 1;
   align-items: center;
   justify-content: center;
+
+  background-color: rgba(100, 100, 100, 0.6);
 `;
 
 export const ModalContent = styled.View`
   padding: 20px;
   border-radius: 5px;
   width: 70%;
-  height: 40%;
+  height: 30%;
   align-items: center;
+  justify-content: center;
 
   background-color: #f9c112;
 `;

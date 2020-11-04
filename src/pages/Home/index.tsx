@@ -1,33 +1,23 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import logoImg from '../../assets/logo.png';
 import Card from '../../components/Card';
+import Header from '../../components/Header';
 
 import * as Styles from './styles';
 
 const Home: React.FC = () => {
+  const navigation = useNavigation();
+
   return (
     <Styles.Container>
-      <Styles.Header
-        // eslint-disable-next-line react-native/no-inline-styles
-        style={{
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 12,
-          },
-          shadowOpacity: 1,
-          shadowRadius: 16.0,
-          elevation: 60,
-        }}>
-        <Styles.Image source={logoImg} />
-      </Styles.Header>
+      <Header />
 
       <Styles.ActionsContainer>
         <Styles.TextInput placeholder="Pesquisar" />
-        <Styles.Button>
+        <Styles.Button onPress={() => navigation.navigate('CreateChild')}>
           <Icon name="plus" size={20} color="#FFF" />
         </Styles.Button>
       </Styles.ActionsContainer>

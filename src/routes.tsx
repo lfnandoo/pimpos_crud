@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from './pages/Home';
+import CreateChild from './pages/CreateChild';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const Routes: React.FC = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="CreateChild" component={CreateChild} />
       </Stack.Navigator>
     </NavigationContainer>
   );
