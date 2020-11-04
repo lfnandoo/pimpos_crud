@@ -36,21 +36,29 @@ const CreateChild: React.FC = () => {
         />
         <Styles.TextInput
           placeholder="Idade"
+          keyboardType="number-pad"
+          maxLength={2}
           value={age}
           onChangeText={(text) => setAge(text)}
         />
         <Styles.TextInput
-          placeholder="Data Medida"
+          placeholder="Data Medida (01 01 2000)"
+          keyboardType="number-pad"
+          maxLength={10}
           value={measuredDate}
           onChangeText={(text) => setMeasureDate(text)}
         />
         <Styles.TextInput
           placeholder="Peso"
+          keyboardType="decimal-pad"
+          maxLength={2}
           value={weight}
           onChangeText={(text) => setWeight(text)}
         />
         <Styles.TextInput
-          placeholder="Altura"
+          placeholder="Altura (145)"
+          keyboardType="decimal-pad"
+          maxLength={3}
           value={height}
           onChangeText={(text) => setHeight(text)}
         />

@@ -4,8 +4,8 @@ export const ActionsContext = React.createContext({});
 
 export const Actions: React.FC = ({ children }) => {
   const createChild = React.useCallback(
-    ({ name, age, meansuredDate, weight, height }) => {
-      console.log({ name, age, meansuredDate, weight, height });
+    ({ name, age, measuredDate, weight, height }) => {
+      console.log({ name, age, measuredDate, weight, height });
     },
     [],
   );
