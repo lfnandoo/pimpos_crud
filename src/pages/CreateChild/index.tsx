@@ -22,7 +22,7 @@ const CreateChild: React.FC = () => {
 
       <Styles.Nav>
         <Styles.Button onPress={() => navigation.navigate('Home')}>
-          <Icon name="chevron-left" size={25} color="black" />
+          <Icon name="chevron-left" size={25} color="rgba(0, 0, 0, .7)" />
         </Styles.Button>
         <Styles.Text>Criar Criança</Styles.Text>
       </Styles.Nav>

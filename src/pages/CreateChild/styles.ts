@@ -20,6 +20,8 @@ export const Text = styled.Text`
   font-family: 'Ubuntu-Bold';
   font-size: 20px;
   margin-left: 5px;
+
+  color: rgba(0, 0, 0, 0.7);
 `;
 
 export const Form = styled.ScrollView`
