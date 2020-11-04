@@ -52,5 +52,7 @@ export const SubmitButton = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
   font-family: 'Ubuntu-Medium';
+  font-size: 18px;
+
   color: #fff;
 `;

@@ -6,8 +6,10 @@ import Icon from 'react-native-vector-icons/Feather';
 import Header from '../../components/Header';
 
 import * as Styles from './styles';
+import { ActionsContext } from '../../context/ActionsContext';
 
 const CreateChild: React.FC = () => {
+  const { createChild }: any = React.useContext(ActionsContext);
   const [name, setName] = React.useState('');
   const [age, setAge] = React.useState('');
   const [measuredDate, setMeasureDate] = React.useState('');
@@ -55,7 +57,7 @@ const CreateChild: React.FC = () => {
         <Styles.SubmitButton>
           <Styles.ButtonText
             onPress={() =>
-              console.log({
+              createChild({
                 name,
                 age,
                 measuredDate,
