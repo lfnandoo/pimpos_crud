@@ -1,22 +1,29 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { ActionsContext } from '../../context/ActionsContext';
 
 import Icon from 'react-native-vector-icons/Feather';
 
 import Header from '../../components/Header';
 
 import * as Styles from './styles';
-import { ActionsContext } from '../../context/ActionsContext';
 
 const CreateChild: React.FC = () => {
-  const { createChild }: any = React.useContext(ActionsContext);
+  const { createChild } = React.useContext(ActionsContext);
+
   const [name, setName] = React.useState('');
   const [age, setAge] = React.useState('');
-  const [measuredDate, setMeasureDate] = React.useState('');
   const [weight, setWeight] = React.useState('');
   const [height, setHeight] = React.useState('');
+  const [measuredDate] = React.useState(new Date());
+  const [showDatePicker, setShowDatePicker] = React.useState(false);
 
   const navigation = useNavigation();
+
+  const handleDatePickerShow = React.useCallback(() => {
+    setShowDatePicker((state) => !state);
+  }, []);
 
   return (
     <Styles.Container>
@@ -41,13 +48,19 @@ const CreateChild: React.FC = () => {
           value={age}
           onChangeText={(text) => setAge(text)}
         />
-        <Styles.TextInput
-          placeholder="Data Medida (01 01 2000)"
-          keyboardType="number-pad"
-          maxLength={10}
-          value={measuredDate}
-          onChangeText={(text) => setMeasureDate(text)}
-        />
+        <Styles.DateInput onPress={handleDatePickerShow}>
+          <Styles.TextDateInput>Data Medida</Styles.TextDateInput>
+        </Styles.DateInput>
+        {showDatePicker && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={measuredDate}
+            mode="date"
+            is24Hour={true}
+            display="default"
+            onChange={handleDatePickerShow}
+          />
+        )}
         <Styles.TextInput
           placeholder="Peso"
           keyboardType="decimal-pad"
