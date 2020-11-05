@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const DateInput = styled.TouchableOpacity`
-  width: 70%;
+  width: 52%;
   height: 45px;
   border-radius: 5px;
   margin: 5px auto;

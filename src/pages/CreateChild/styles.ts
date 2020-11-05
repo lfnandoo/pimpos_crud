@@ -31,7 +31,7 @@ export const Form = styled.ScrollView`
 
 export const TextInput = styled.TextInput`
   font-family: 'Ubuntu-Regular';
-  width: 70%;
+  width: 52%;
   margin: 6px auto;
   height: 45px;
   border-radius: 5px;
@@ -87,6 +87,7 @@ export const IconBlock = styled.View`
   width: 18%;
   height: 45px;
   justify-content: center;
+  align-items: center;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 

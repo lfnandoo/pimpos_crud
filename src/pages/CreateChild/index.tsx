@@ -10,6 +10,8 @@ import DecimalInput from '../../components/DecimalInput';
 
 import heightImg from '../../assets/height.png';
 import kgImg from '../../assets/kg.png';
+import calendarImg from '../../assets/calendar.png';
+import nameImg from '../../assets/name.png';
 
 import * as Styles from './styles';
 
@@ -39,25 +41,40 @@ const CreateChild: React.FC = () => {
         <Styles.Text>Criar Criança</Styles.Text>
       </Styles.Nav>
       <Styles.Form>
-        <Styles.TextInput
-          placeholder="Nome"
-          value={name}
-          onChangeText={(text) => setName(text)}
-        />
-        <DatePickerInput
-          showDatePicker={showBirthDatePicker}
-          setShowDatePicker={setShowBirthDatePicker}
-          date={birthDate}
-          setDate={setBirthDate}
-          placeholder="Data de Nascimento"
-        />
-        <DatePickerInput
-          showDatePicker={showMeasuredDatePicker}
-          setShowDatePicker={setShowMeasuredDatePicker}
-          date={measuredDate}
-          setDate={setMeasuredDate}
-          placeholder="Data Medida"
-        />
+        <Styles.InputBlock>
+          <Styles.TextInput
+            placeholder="Nome"
+            value={name}
+            onChangeText={(text) => setName(text)}
+          />
+          <Styles.IconBlock>
+            <Styles.Image source={nameImg} />
+          </Styles.IconBlock>
+        </Styles.InputBlock>
+        <Styles.InputBlock>
+          <DatePickerInput
+            showDatePicker={showBirthDatePicker}
+            setShowDatePicker={setShowBirthDatePicker}
+            date={birthDate}
+            setDate={setBirthDate}
+            placeholder="Nascimento"
+          />
+          <Styles.IconBlock>
+            <Styles.Image source={calendarImg} />
+          </Styles.IconBlock>
+        </Styles.InputBlock>
+        <Styles.InputBlock>
+          <DatePickerInput
+            showDatePicker={showMeasuredDatePicker}
+            setShowDatePicker={setShowMeasuredDatePicker}
+            date={measuredDate}
+            setDate={setMeasuredDate}
+            placeholder="Data Medida"
+          />
+          <Styles.IconBlock>
+            <Styles.Image source={calendarImg} />
+          </Styles.IconBlock>
+        </Styles.InputBlock>
         <Styles.View>
           <Styles.InputBlock>
             <DecimalInput
