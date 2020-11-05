@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { ActionsContext } from '../../context/ActionsContext';
 
 import Icon from 'react-native-vector-icons/Feather';
@@ -8,30 +7,22 @@ import Icon from 'react-native-vector-icons/Feather';
 import Header from '../../components/Header';
 
 import * as Styles from './styles';
+import DatePickerInput from '../../components/DatePickerInput';
 
 const CreateChild: React.FC = () => {
   const { createChild } = React.useContext(ActionsContext);
 
   const [name, setName] = React.useState('');
-  const [age, setAge] = React.useState('');
   const [weight, setWeight] = React.useState('');
   const [height, setHeight] = React.useState('');
+  const [birthDate, setBirthDate] = React.useState(new Date());
+  const [showBirthDatePicker, setShowBirthDatePicker] = React.useState(false);
   const [measuredDate, setMeasuredDate] = React.useState(new Date());
-  const [showDatePicker, setShowDatePicker] = React.useState(false);
+  const [showMeasuredDatePicker, setShowMeasuredDatePicker] = React.useState(
+    false,
+  );
 
   const navigation = useNavigation();
-
-  const handleDatePickerShow = React.useCallback(() => {
-    setShowDatePicker((state) => !state);
-  }, []);
-
-  const handleDateFormater = React.useCallback(
-    ({ nativeEvent }) => {
-      handleDatePickerShow();
-      setMeasuredDate(new Date(nativeEvent.timestamp));
-    },
-    [handleDatePickerShow],
-  );
 
   return (
     <Styles.Container>
@@ -49,28 +40,20 @@ const CreateChild: React.FC = () => {
           value={name}
           onChangeText={(text) => setName(text)}
         />
-        <Styles.TextInput
-          placeholder="Idade"
-          keyboardType="number-pad"
-          maxLength={2}
-          value={age}
-          onChangeText={(text) => setAge(text)}
+        <DatePickerInput
+          showDatePicker={showBirthDatePicker}
+          setShowDatePicker={setShowBirthDatePicker}
+          date={birthDate}
+          setDate={setBirthDate}
+          placeholder="Data de Nascimento"
         />
-        <Styles.DateInput onPress={handleDatePickerShow}>
-          <Styles.TextDateInput>
-            Data Medida: {measuredDate.toLocaleDateString()}
-          </Styles.TextDateInput>
-        </Styles.DateInput>
-        {showDatePicker && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={measuredDate}
-            mode="date"
-            is24Hour={true}
-            display="default"
-            onChange={handleDateFormater}
-          />
-        )}
+        <DatePickerInput
+          showDatePicker={showMeasuredDatePicker}
+          setShowDatePicker={setShowMeasuredDatePicker}
+          date={measuredDate}
+          setDate={setMeasuredDate}
+          placeholder="Data Medida"
+        />
         <Styles.TextInput
           placeholder="Peso"
           keyboardType="decimal-pad"
@@ -90,7 +73,7 @@ const CreateChild: React.FC = () => {
             onPress={() =>
               createChild({
                 name,
-                age,
+                birthDate,
                 measuredDate,
                 weight,
                 height,

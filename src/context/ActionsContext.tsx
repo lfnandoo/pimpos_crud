@@ -6,7 +6,7 @@ interface ActionsContextProps {
 
 interface DataProps {
   name: string;
-  age: string;
+  birthDate: string | Date;
   measuredDate: string | Date;
   weight: string;
   height: string;
@@ -18,8 +18,8 @@ export const ActionsContext = React.createContext<ActionsContextProps>(
 
 export const Actions: React.FC = ({ children }) => {
   const createChild = React.useCallback(
-    ({ name, age, measuredDate, weight, height }) => {
-      console.log({ name, age, measuredDate, weight, height });
+    ({ name, birthDate, measuredDate, weight, height }: DataProps) => {
+      console.log({ name, birthDate, measuredDate, weight, height });
     },
     [],
   );
