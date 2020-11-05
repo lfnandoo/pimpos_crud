@@ -5,11 +5,13 @@ import { ActionsContext } from '../../context/ActionsContext';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Header from '../../components/Header';
+import DatePickerInput from '../../components/DatePickerInput';
+import DecimalInput from '../../components/DecimalInput';
+
 import heightImg from '../../assets/height.png';
 import kgImg from '../../assets/kg.png';
 
 import * as Styles from './styles';
-import DatePickerInput from '../../components/DatePickerInput';
 
 const CreateChild: React.FC = () => {
   const { createChild } = React.useContext(ActionsContext);
@@ -25,11 +27,6 @@ const CreateChild: React.FC = () => {
   );
 
   const navigation = useNavigation();
-
-  function onChangeAcceptOnlyNumbers(text: string) {
-    let inputValue = text.replace(/\D/g, '');
-    setWeight(inputValue);
-  }
 
   return (
     <Styles.Container>
@@ -63,24 +60,20 @@ const CreateChild: React.FC = () => {
         />
         <Styles.View>
           <Styles.InputBlock>
-            <Styles.DecimalInput
+            <DecimalInput
               placeholder="Peso"
-              keyboardType="decimal-pad"
-              maxLength={4}
               value={weight}
-              onChangeText={onChangeAcceptOnlyNumbers}
+              setValue={setWeight}
             />
             <Styles.IconBlock>
               <Styles.Image source={kgImg} />
             </Styles.IconBlock>
           </Styles.InputBlock>
           <Styles.InputBlock>
-            <Styles.DecimalInput
+            <DecimalInput
               placeholder="Altura"
-              keyboardType="decimal-pad"
-              maxLength={4}
               value={height}
-              onChangeText={(text) => setHeight(text)}
+              setValue={setHeight}
             />
             <Styles.IconBlock>
               <Styles.Image source={heightImg} />

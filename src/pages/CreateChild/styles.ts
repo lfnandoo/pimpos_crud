@@ -96,4 +96,5 @@ export const IconBlock = styled.View`
 export const Image = styled.Image`
   width: 20px;
   height: 20px;
+  opacity: 0.5;
 `;
