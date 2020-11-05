@@ -16,7 +16,7 @@ const CreateChild: React.FC = () => {
   const [age, setAge] = React.useState('');
   const [weight, setWeight] = React.useState('');
   const [height, setHeight] = React.useState('');
-  const [measuredDate] = React.useState(new Date());
+  const [measuredDate, setMeasuredDate] = React.useState(new Date());
   const [showDatePicker, setShowDatePicker] = React.useState(false);
 
   const navigation = useNavigation();
@@ -24,6 +24,14 @@ const CreateChild: React.FC = () => {
   const handleDatePickerShow = React.useCallback(() => {
     setShowDatePicker((state) => !state);
   }, []);
+
+  const handleDateFormater = React.useCallback(
+    ({ nativeEvent }) => {
+      handleDatePickerShow();
+      setMeasuredDate(new Date(nativeEvent.timestamp));
+    },
+    [handleDatePickerShow],
+  );
 
   return (
     <Styles.Container>
@@ -49,7 +57,9 @@ const CreateChild: React.FC = () => {
           onChangeText={(text) => setAge(text)}
         />
         <Styles.DateInput onPress={handleDatePickerShow}>
-          <Styles.TextDateInput>Data Medida</Styles.TextDateInput>
+          <Styles.TextDateInput>
+            Data Medida: {measuredDate.toLocaleDateString()}
+          </Styles.TextDateInput>
         </Styles.DateInput>
         {showDatePicker && (
           <DateTimePicker
@@ -58,7 +68,7 @@ const CreateChild: React.FC = () => {
             mode="date"
             is24Hour={true}
             display="default"
-            onChange={handleDatePickerShow}
+            onChange={handleDateFormater}
           />
         )}
         <Styles.TextInput
