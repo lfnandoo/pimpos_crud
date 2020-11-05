@@ -97,19 +97,17 @@ const CreateChild: React.FC = () => {
             </Styles.IconBlock>
           </Styles.InputBlock>
         </Styles.View>
-        <Styles.SubmitButton>
-          <Styles.ButtonText
-            onPress={() =>
-              createChild({
-                name,
-                birthDate,
-                measuredDate,
-                weight,
-                height,
-              })
-            }>
-            Criar
-          </Styles.ButtonText>
+        <Styles.SubmitButton
+          onPress={() =>
+            createChild({
+              name,
+              birthDate,
+              measuredDate,
+              weight,
+              height,
+            })
+          }>
+          <Styles.ButtonText>Criar</Styles.ButtonText>
         </Styles.SubmitButton>
       </Styles.Form>
     </Styles.Container>
