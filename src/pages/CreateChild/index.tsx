@@ -5,6 +5,8 @@ import { ActionsContext } from '../../context/ActionsContext';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Header from '../../components/Header';
+import heightImg from '../../assets/height.png';
+import kgImg from '../../assets/kg.png';
 
 import * as Styles from './styles';
 import DatePickerInput from '../../components/DatePickerInput';
@@ -23,6 +25,11 @@ const CreateChild: React.FC = () => {
   );
 
   const navigation = useNavigation();
+
+  function onChangeAcceptOnlyNumbers(text: string) {
+    let inputValue = text.replace(/\D/g, '');
+    setWeight(inputValue);
+  }
 
   return (
     <Styles.Container>
@@ -54,20 +61,32 @@ const CreateChild: React.FC = () => {
           setDate={setMeasuredDate}
           placeholder="Data Medida"
         />
-        <Styles.TextInput
-          placeholder="Peso"
-          keyboardType="decimal-pad"
-          maxLength={2}
-          value={weight}
-          onChangeText={(text) => setWeight(text)}
-        />
-        <Styles.TextInput
-          placeholder="Altura (145)"
-          keyboardType="decimal-pad"
-          maxLength={3}
-          value={height}
-          onChangeText={(text) => setHeight(text)}
-        />
+        <Styles.View>
+          <Styles.InputBlock>
+            <Styles.DecimalInput
+              placeholder="Peso"
+              keyboardType="decimal-pad"
+              maxLength={4}
+              value={weight}
+              onChangeText={onChangeAcceptOnlyNumbers}
+            />
+            <Styles.IconBlock>
+              <Styles.Image source={kgImg} />
+            </Styles.IconBlock>
+          </Styles.InputBlock>
+          <Styles.InputBlock>
+            <Styles.DecimalInput
+              placeholder="Altura"
+              keyboardType="decimal-pad"
+              maxLength={4}
+              value={height}
+              onChangeText={(text) => setHeight(text)}
+            />
+            <Styles.IconBlock>
+              <Styles.Image source={heightImg} />
+            </Styles.IconBlock>
+          </Styles.InputBlock>
+        </Styles.View>
         <Styles.SubmitButton>
           <Styles.ButtonText
             onPress={() =>
