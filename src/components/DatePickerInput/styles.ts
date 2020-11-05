@@ -15,3 +15,8 @@ export const TextDateInput = styled.Text`
   font-size: 14px;
   color: rgba(0, 0, 0, 0.4);
 `;
+
+export const Strong = styled.Text`
+  font-family: 'Ubuntu-Bold';
+  color: rgba(0, 0, 0, 0.6);
+`;
