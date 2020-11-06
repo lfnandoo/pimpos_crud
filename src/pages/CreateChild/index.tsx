@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { ActionsContext } from '../../context/ActionsContext';
 import { ToastAndroid } from 'react-native';
+import uuid from 'uuid-random';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -43,7 +44,10 @@ const CreateChild: React.FC = () => {
       );
     }
 
+    const id = uuid();
+
     createChild({
+      id,
       name,
       weight,
       height,
