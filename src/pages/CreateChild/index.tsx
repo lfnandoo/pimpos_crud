@@ -122,6 +122,7 @@ const CreateChild: React.FC = () => {
           <Styles.InputBlock>
             <DecimalInput
               placeholder="Peso"
+              type={'WEIGHT'}
               value={weight}
               setValue={setWeight}
               maxLength={6}
@@ -133,9 +134,10 @@ const CreateChild: React.FC = () => {
           <Styles.InputBlock>
             <DecimalInput
               placeholder="Altura"
+              type={'HEIGHT'}
               value={height}
               setValue={setHeight}
-              maxLength={3}
+              maxLength={5}
             />
             <Styles.IconBlock>
               <Styles.Image source={heightImg} />
