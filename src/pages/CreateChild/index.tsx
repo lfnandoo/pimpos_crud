@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { ActionsContext } from '../../context/ActionsContext';
+import { ToastAndroid } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -29,6 +30,23 @@ const CreateChild: React.FC = () => {
   );
 
   const navigation = useNavigation();
+
+  const handleValidation = React.useCallback(() => {
+    if (name === '' || weight === '' || height === '') {
+      return ToastAndroid.show(
+        'Preencha todas as informações!',
+        ToastAndroid.SHORT,
+      );
+    }
+
+    createChild({
+      name,
+      weight,
+      height,
+      birthDate,
+      measuredDate,
+    });
+  }, [createChild, birthDate, height, measuredDate, name, weight]);
 
   return (
     <Styles.Container>
@@ -97,16 +115,7 @@ const CreateChild: React.FC = () => {
             </Styles.IconBlock>
           </Styles.InputBlock>
         </Styles.View>
-        <Styles.SubmitButton
-          onPress={() =>
-            createChild({
-              name,
-              birthDate,
-              measuredDate,
-              weight,
-              height,
-            })
-          }>
+        <Styles.SubmitButton onPress={handleValidation}>
           <Styles.ButtonText>Criar</Styles.ButtonText>
         </Styles.SubmitButton>
       </Styles.Form>
