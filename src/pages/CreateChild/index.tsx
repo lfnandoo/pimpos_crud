@@ -31,6 +31,10 @@ const CreateChild: React.FC = () => {
 
   const navigation = useNavigation();
 
+  const homeNavigation = React.useCallback(() => {
+    navigation.navigate('Home');
+  }, [navigation]);
+
   const handleValidation = React.useCallback(() => {
     if (name === '' || weight === '' || height === '') {
       return ToastAndroid.show(
@@ -46,14 +50,24 @@ const CreateChild: React.FC = () => {
       birthDate,
       measuredDate,
     });
-  }, [createChild, birthDate, height, measuredDate, name, weight]);
+    homeNavigation();
+    ToastAndroid.show('Nova criança criada!', ToastAndroid.CENTER);
+  }, [
+    createChild,
+    homeNavigation,
+    birthDate,
+    height,
+    measuredDate,
+    name,
+    weight,
+  ]);
 
   return (
     <Styles.Container>
       <Header />
 
       <Styles.Nav>
-        <Styles.Button onPress={() => navigation.navigate('Home')}>
+        <Styles.Button onPress={homeNavigation}>
           <Icon name="chevron-left" size={25} color="rgba(0, 0, 0, .7)" />
         </Styles.Button>
         <Styles.Text>Criar Criança</Styles.Text>
