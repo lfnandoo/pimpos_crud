@@ -15,6 +15,7 @@ import kgImg from '../../assets/kg.png';
 import calendarImg from '../../assets/calendar.png';
 import nameImg from '../../assets/name.png';
 
+import { Strong } from '../../components/DatePickerInput/styles';
 import * as Styles from './styles';
 
 const CreateChild: React.FC = () => {
@@ -29,14 +30,20 @@ const CreateChild: React.FC = () => {
   const [showMeasuredDatePicker, setShowMeasuredDatePicker] = React.useState(
     false,
   );
+  const [imc, setImc] = React.useState(0);
 
   const navigation = useNavigation();
+
+  React.useEffect(() => {
+    const newImc = (Number(weight) / Number(height)) * Number(height);
+    setImc(newImc);
+  }, [weight, height]);
 
   const homeNavigation = React.useCallback(() => {
     navigation.navigate('Home');
   }, [navigation]);
 
-  const handleValidation = React.useCallback(() => {
+  const handleSubmit = React.useCallback(() => {
     if (name === '' || weight === '' || height === '') {
       return ToastAndroid.show(
         'Preencha todas as informações!',
@@ -117,6 +124,7 @@ const CreateChild: React.FC = () => {
               placeholder="Peso"
               value={weight}
               setValue={setWeight}
+              maxLength={2}
             />
             <Styles.IconBlock>
               <Styles.Image source={kgImg} />
@@ -127,13 +135,20 @@ const CreateChild: React.FC = () => {
               placeholder="Altura"
               value={height}
               setValue={setHeight}
+              maxLength={3}
             />
             <Styles.IconBlock>
               <Styles.Image source={heightImg} />
             </Styles.IconBlock>
           </Styles.InputBlock>
         </Styles.View>
-        <Styles.SubmitButton onPress={handleValidation}>
+        <Styles.PreviewCalcs>
+          IMC: <Strong>{imc ? imc : 'Preencha todos os valores'}</Strong>
+        </Styles.PreviewCalcs>
+        <Styles.PreviewCalcs>
+          Massa Cefálica: <Strong>{imc ? imc : 'Preencha os valores'}</Strong>
+        </Styles.PreviewCalcs>
+        <Styles.SubmitButton onPress={handleSubmit}>
           <Styles.ButtonText>Criar</Styles.ButtonText>
         </Styles.SubmitButton>
       </Styles.Form>

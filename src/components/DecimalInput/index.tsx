@@ -4,6 +4,7 @@ interface DecimalInputProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   placeholder: string;
+  maxLength: number;
 }
 
 import * as Styles from './styles';
@@ -12,6 +13,7 @@ const DecimalInput: React.FC<DecimalInputProps> = ({
   value,
   setValue,
   placeholder,
+  ...rest
 }) => {
   function onChangeAcceptOnlyNumbers(text: string) {
     let inputValue = text.replace(/\D/g, '');
@@ -23,7 +25,7 @@ const DecimalInput: React.FC<DecimalInputProps> = ({
       <Styles.Input
         placeholder={placeholder}
         keyboardType="decimal-pad"
-        maxLength={4}
+        {...rest}
         value={value}
         onChangeText={onChangeAcceptOnlyNumbers}
       />
