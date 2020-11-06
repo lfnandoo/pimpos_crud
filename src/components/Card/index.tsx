@@ -2,7 +2,21 @@ import React from 'react';
 
 import * as Styles from './styles';
 
-const Card: React.FC = () => {
+interface CardDataProps {
+  name: string;
+  birthDate: string | Date;
+  measuredDate: string | Date;
+  weight: string;
+  height: string;
+}
+
+const Card: React.FC<CardDataProps> = ({
+  name,
+  birthDate,
+  measuredDate,
+  weight,
+  height,
+}) => {
   const [modalVisible, setModalVisible] = React.useState(false);
 
   return (
@@ -16,10 +30,10 @@ const Card: React.FC = () => {
         }}>
         <Styles.View>
           <Styles.ModalContent>
-            <Styles.NameText>Luiz Miguel Ramos</Styles.NameText>
-            <Styles.Text>1 ano, 2 meses e 15 dias</Styles.Text>
-            <Styles.Text>15/07/2020</Styles.Text>
-            <Styles.Text>26Kg</Styles.Text>
+            <Styles.NameText>{name}</Styles.NameText>
+            <Styles.Text>{birthDate}</Styles.Text>
+            <Styles.Text>{measuredDate}</Styles.Text>
+            <Styles.Text>{weight}Kg</Styles.Text>
             <Styles.Text>0,66</Styles.Text>
             <Styles.Text>16,32</Styles.Text>
           </Styles.ModalContent>
@@ -29,10 +43,11 @@ const Card: React.FC = () => {
         onPress={() => {
           setModalVisible(!modalVisible);
         }}>
-        <Styles.NameText>Luiz Miguel Ramos</Styles.NameText>
+        <Styles.NameText>{name}</Styles.NameText>
         <Styles.CardInfos>
-          <Styles.Text>1 ano, 2 meses e 15 dias</Styles.Text>
-          <Styles.Text>15/07/2020</Styles.Text>
+          <Styles.Text>{birthDate}</Styles.Text>
+          <Styles.Text>{measuredDate}</Styles.Text>
+          <Styles.Text>{height}</Styles.Text>
         </Styles.CardInfos>
       </Styles.Container>
     </>

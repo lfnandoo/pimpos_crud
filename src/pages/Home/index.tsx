@@ -1,5 +1,6 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { ActionsContext } from '../../context/ActionsContext';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -8,8 +9,34 @@ import Header from '../../components/Header';
 
 import * as Styles from './styles';
 
-const Home: React.FC = () => {
+interface dataProps {
+  id: string;
+  name: string;
+  birthDate: string | Date;
+  measuredDate: string | Date;
+  weight: string;
+  height: string;
+}
+
+const Home: React.FC<dataProps> = () => {
   const navigation = useNavigation();
+  const isPageFocused = useIsFocused();
+
+  const { getChildren } = React.useContext(ActionsContext);
+
+  const [childrenData, setChildrenData] = React.useState<dataProps[] | never[]>(
+    [],
+  );
+
+  React.useEffect(() => {
+    (async () => {
+      const response = await getChildren();
+      if (response) {
+        const parsedResponse = JSON.parse(response);
+        setChildrenData(parsedResponse);
+      }
+    })();
+  }, [getChildren, isPageFocused]);
 
   return (
     <Styles.Container>
@@ -23,22 +50,17 @@ const Home: React.FC = () => {
       </Styles.ActionsContainer>
 
       <Styles.MainContent>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {childrenData &&
+          childrenData.map((child: dataProps) => (
+            <Card
+              key={child.id}
+              name={child.name}
+              birthDate={child.birthDate}
+              measuredDate={child.measuredDate}
+              weight={child.weight}
+              height={child.height}
+            />
+          ))}
       </Styles.MainContent>
     </Styles.Container>
   );
