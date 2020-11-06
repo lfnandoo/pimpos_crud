@@ -23,9 +23,13 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
   }, [setShowDatePicker]);
 
   const handleDateFormater = React.useCallback(
-    ({ nativeEvent }) => {
+    (event) => {
+      if (event.type === 'dismissed') {
+        return;
+      }
+
       handleDatePickerShow();
-      setDate(new Date(nativeEvent.timestamp));
+      setDate(new Date(event.nativeEvent.timestamp));
     },
     [handleDatePickerShow, setDate],
   );
