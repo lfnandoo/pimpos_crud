@@ -124,7 +124,7 @@ const CreateChild: React.FC = () => {
               placeholder="Peso"
               value={weight}
               setValue={setWeight}
-              maxLength={2}
+              maxLength={6}
             />
             <Styles.IconBlock>
               <Styles.Image source={kgImg} />
