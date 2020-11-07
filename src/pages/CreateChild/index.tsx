@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { ActionsContext } from '../../context/ActionsContext';
 import { ToastAndroid } from 'react-native';
-import uuid from 'uuid-random';
+import api from '../../services/api';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -19,8 +18,6 @@ import { Strong } from '../../components/DatePickerInput/styles';
 import * as Styles from './styles';
 
 const CreateChild: React.FC = () => {
-  const { createChild } = React.useContext(ActionsContext);
-
   const [name, setName] = React.useState('');
   const [weight, setWeight] = React.useState('');
   const [height, setHeight] = React.useState('');
@@ -39,38 +36,43 @@ const CreateChild: React.FC = () => {
     setImc(newImc);
   }, [weight, height]);
 
-  const homeNavigation = React.useCallback(() => {
+  const handleNavigationToHome = React.useCallback(() => {
     navigation.navigate('Home');
   }, [navigation]);
 
-  const handleSubmit = React.useCallback(() => {
+  const handleValidate = React.useCallback(() => {
     if (name === '' || weight === '' || height === '') {
       return ToastAndroid.show(
         'Preencha todas as informações!',
         ToastAndroid.SHORT,
       );
     }
+  }, [height, name, weight]);
 
-    const id = uuid();
+  const handleSubmitNewChild = React.useCallback(async () => {
+    handleValidate();
 
-    createChild({
-      id,
-      name,
-      weight,
-      height,
-      birthDate,
-      measuredDate,
-    });
-    homeNavigation();
-    ToastAndroid.show('Nova criança criada!', ToastAndroid.CENTER);
+    try {
+      await api.post('/childs.json', {
+        name,
+        birthdate: birthDate,
+        measured_date: measuredDate,
+        weight,
+        height,
+      });
+
+      handleNavigationToHome();
+    } catch (e) {
+      // tratar erros aq
+    }
   }, [
-    createChild,
-    homeNavigation,
-    birthDate,
-    height,
-    measuredDate,
+    handleValidate,
     name,
+    birthDate,
+    measuredDate,
     weight,
+    height,
+    handleNavigationToHome,
   ]);
 
   return (
@@ -78,7 +80,7 @@ const CreateChild: React.FC = () => {
       <Header />
 
       <Styles.Nav>
-        <Styles.Button onPress={homeNavigation}>
+        <Styles.Button onPress={handleNavigationToHome}>
           <Icon name="chevron-left" size={25} color="rgba(0, 0, 0, .7)" />
         </Styles.Button>
         <Styles.Text>Criar Criança</Styles.Text>
@@ -150,7 +152,7 @@ const CreateChild: React.FC = () => {
         <Styles.PreviewCalcs>
           Massa Cefálica: <Strong>{imc ? imc : 'Preencha os valores'}</Strong>
         </Styles.PreviewCalcs>
-        <Styles.SubmitButton onPress={handleSubmit}>
+        <Styles.SubmitButton onPress={handleSubmitNewChild}>
           <Styles.ButtonText>Criar</Styles.ButtonText>
         </Styles.SubmitButton>
       </Styles.Form>

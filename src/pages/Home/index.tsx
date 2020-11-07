@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { ActionsContext } from '../../context/ActionsContext';
+import api from '../../services/api';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -8,12 +8,12 @@ import Card from '../../components/Card';
 import Header from '../../components/Header';
 
 import * as Styles from './styles';
+import { Text } from '../../components/Card/styles';
 
 interface dataProps {
-  id: string;
   name: string;
-  birthDate: string | Date;
-  measuredDate: string | Date;
+  birthdate: string | Date;
+  measured_date: string | Date;
   weight: string;
   height: string;
 }
@@ -22,21 +22,22 @@ const Home: React.FC<dataProps> = () => {
   const navigation = useNavigation();
   const isPageFocused = useIsFocused();
 
-  const { getChildren } = React.useContext(ActionsContext);
-
-  const [childrenData, setChildrenData] = React.useState<dataProps[] | never[]>(
-    [],
-  );
+  const [childrenData, setChildrenData] = React.useState<dataProps[]>([]);
 
   React.useEffect(() => {
-    (async () => {
-      const response = await getChildren();
-      if (response) {
-        const parsedResponse = JSON.parse(response);
-        setChildrenData(parsedResponse);
-      }
-    })();
-  }, [getChildren, isPageFocused]);
+    if (isPageFocused) {
+      (async () => {
+        try {
+          const { data } = await api.get('childs.json');
+
+          setChildrenData(data);
+        } catch (e) {
+          // tratar erros aq
+          console.log(e);
+        }
+      })();
+    }
+  }, [isPageFocused]);
 
   return (
     <Styles.Container>
@@ -50,17 +51,20 @@ const Home: React.FC<dataProps> = () => {
       </Styles.ActionsContainer>
 
       <Styles.MainContent>
-        {childrenData &&
-          childrenData.map((child: dataProps) => (
+        {childrenData ? (
+          Object.keys(childrenData).map((key: any) => (
             <Card
-              key={child.id}
-              name={child.name}
-              birthDate={child.birthDate}
-              measuredDate={child.measuredDate}
-              weight={child.weight}
-              height={child.height}
+              key={key}
+              name={childrenData[key].name}
+              birthDate={childrenData[key].birthdate}
+              measuredDate={childrenData[key].measured_date}
+              weight={childrenData[key].weight}
+              height={childrenData[key].height}
             />
-          ))}
+          ))
+        ) : (
+          <Text>adsdas</Text>
+        )}
       </Styles.MainContent>
     </Styles.Container>
   );
