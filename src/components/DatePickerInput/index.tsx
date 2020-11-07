@@ -5,9 +5,9 @@ import * as Styles from './styles';
 
 interface DatePickerInputProps {
   setShowDatePicker: React.Dispatch<React.SetStateAction<boolean>>;
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
+  setDate: React.Dispatch<React.SetStateAction<Date | null>>;
   showDatePicker: Boolean;
-  date: Date;
+  date: Date | null;
   placeholder: String;
 }
 
@@ -39,13 +39,13 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
       <Styles.DateInput onPress={handleDatePickerShow}>
         <Styles.TextDateInput>
           {placeholder}:{' '}
-          <Styles.Strong>{date.toLocaleDateString()}</Styles.Strong>
+          <Styles.Strong>{date?.toLocaleDateString()}</Styles.Strong>
         </Styles.TextDateInput>
       </Styles.DateInput>
       {showDatePicker && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={date ? date : new Date()}
           mode="date"
           is24Hour={true}
           display="default"

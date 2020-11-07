@@ -21,9 +21,9 @@ const CreateChild: React.FC = () => {
   const [name, setName] = React.useState('');
   const [weight, setWeight] = React.useState('');
   const [height, setHeight] = React.useState('');
-  const [birthDate, setBirthDate] = React.useState(new Date());
+  const [birthDate, setBirthDate] = React.useState<Date | null>(null);
   const [showBirthDatePicker, setShowBirthDatePicker] = React.useState(false);
-  const [measuredDate, setMeasuredDate] = React.useState(new Date());
+  const [measuredDate, setMeasuredDate] = React.useState<Date | null>(null);
   const [showMeasuredDatePicker, setShowMeasuredDatePicker] = React.useState(
     false,
   );
