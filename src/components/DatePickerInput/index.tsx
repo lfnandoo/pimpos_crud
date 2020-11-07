@@ -2,6 +2,7 @@ import React from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import * as Styles from './styles';
+import { formatSimpleDate } from '../../utils/formatSimpleDate';
 
 interface DatePickerInputProps {
   setShowDatePicker: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,7 +41,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
         <Styles.TextDateInput>
           {placeholder}:{' '}
           <Styles.Strong>
-            {date?.toLocaleDateString() ? date?.toLocaleDateString() : 'N/A'}
+            {date ? formatSimpleDate(new Date(date)) : 'N/A'}
           </Styles.Strong>
         </Styles.TextDateInput>
       </Styles.DateInput>

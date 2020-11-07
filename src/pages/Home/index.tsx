@@ -12,6 +12,7 @@ import * as Styles from './styles';
 interface dataProps {
   name: string;
   birthdate: string | Date;
+  cephalic_perimeter: string;
   measured_date: string | Date;
   weight: string;
   height: string;
@@ -59,6 +60,7 @@ const Home: React.FC<dataProps> = () => {
               key={key}
               name={childrenData[key].name}
               birthDate={childrenData[key].birthdate}
+              cephalicPerimeter={childrenData[key].cephalic_perimeter}
               measuredDate={childrenData[key].measured_date}
               weight={childrenData[key].weight}
               height={childrenData[key].height}
