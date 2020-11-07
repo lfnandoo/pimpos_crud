@@ -39,7 +39,9 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
       <Styles.DateInput onPress={handleDatePickerShow}>
         <Styles.TextDateInput>
           {placeholder}:{' '}
-          <Styles.Strong>{date?.toLocaleDateString()}</Styles.Strong>
+          <Styles.Strong>
+            {date?.toLocaleDateString() ? date?.toLocaleDateString() : 'N/A'}
+          </Styles.Strong>
         </Styles.TextDateInput>
       </Styles.DateInput>
       {showDatePicker && (

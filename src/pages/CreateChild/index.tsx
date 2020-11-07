@@ -9,9 +9,11 @@ import Header from '../../components/Header';
 import DatePickerInput from '../../components/DatePickerInput';
 import DecimalInput from '../../components/DecimalInput';
 
+import brainImg from '../../assets/brainstorm.png';
 import heightImg from '../../assets/height.png';
 import kgImg from '../../assets/kg.png';
-import calendarImg from '../../assets/calendar.png';
+import calendarImg from '../../assets/birthdate.png';
+import birthdateImg from '../../assets/calendar.png';
 import nameImg from '../../assets/name.png';
 
 import { Strong } from '../../components/DatePickerInput/styles';
@@ -19,6 +21,7 @@ import * as Styles from './styles';
 
 const CreateChild: React.FC = () => {
   const [name, setName] = React.useState('');
+  const [cephalicPerimeter, setCephalicPerimeter] = React.useState('');
   const [weight, setWeight] = React.useState('');
   const [height, setHeight] = React.useState('');
   const [birthDate, setBirthDate] = React.useState<Date | null>(null);
@@ -52,13 +55,18 @@ const CreateChild: React.FC = () => {
   }, [navigation]);
 
   const handleValidation = React.useCallback(() => {
-    if (name === '' || weight === '' || height === '') {
+    if (
+      name === '' ||
+      cephalicPerimeter === '' ||
+      weight === '' ||
+      height === ''
+    ) {
       return ToastAndroid.show(
         'Preencha todas as informações!',
         ToastAndroid.SHORT,
       );
     }
-  }, [height, name, weight]);
+  }, [cephalicPerimeter, height, name, weight]);
 
   const handleSubmitNewChild = React.useCallback(async () => {
     handleValidation();
@@ -68,6 +76,7 @@ const CreateChild: React.FC = () => {
         name,
         birthdate: birthDate,
         measured_date: measuredDate,
+        cephalic_perimeter: cephalicPerimeter,
         weight,
         height,
       });
@@ -81,6 +90,7 @@ const CreateChild: React.FC = () => {
     name,
     birthDate,
     measuredDate,
+    cephalicPerimeter,
     weight,
     height,
     handleNavigationToHome,
@@ -116,7 +126,7 @@ const CreateChild: React.FC = () => {
             placeholder="Nascimento"
           />
           <Styles.IconBlock>
-            <Styles.Image source={calendarImg} />
+            <Styles.Image source={birthdateImg} />
           </Styles.IconBlock>
         </Styles.InputBlock>
         <Styles.InputBlock>
@@ -131,32 +141,42 @@ const CreateChild: React.FC = () => {
             <Styles.Image source={calendarImg} />
           </Styles.IconBlock>
         </Styles.InputBlock>
-        <Styles.View>
-          <Styles.InputBlock>
-            <DecimalInput
-              placeholder="Peso"
-              type={'WEIGHT'}
-              value={weight}
-              setValue={setWeight}
-              maxLength={6}
-            />
-            <Styles.IconBlock>
-              <Styles.Image source={kgImg} />
-            </Styles.IconBlock>
-          </Styles.InputBlock>
-          <Styles.InputBlock>
-            <DecimalInput
-              placeholder="Altura"
-              type={'HEIGHT'}
-              value={height}
-              setValue={setHeight}
-              maxLength={5}
-            />
-            <Styles.IconBlock>
-              <Styles.Image source={heightImg} />
-            </Styles.IconBlock>
-          </Styles.InputBlock>
-        </Styles.View>
+        <Styles.InputBlock>
+          <DecimalInput
+            placeholder="Perímetro Cefálico"
+            type={'CEPHALIC_PERIMETER'}
+            value={cephalicPerimeter}
+            setValue={setCephalicPerimeter}
+            maxLength={5}
+          />
+          <Styles.IconBlock>
+            <Styles.Image source={brainImg} />
+          </Styles.IconBlock>
+        </Styles.InputBlock>
+        <Styles.InputBlock>
+          <DecimalInput
+            placeholder="Peso"
+            type={'WEIGHT'}
+            value={weight}
+            setValue={setWeight}
+            maxLength={6}
+          />
+          <Styles.IconBlock>
+            <Styles.Image source={kgImg} />
+          </Styles.IconBlock>
+        </Styles.InputBlock>
+        <Styles.InputBlock>
+          <DecimalInput
+            placeholder="Altura"
+            type={'HEIGHT'}
+            value={height}
+            setValue={setHeight}
+            maxLength={5}
+          />
+          <Styles.IconBlock>
+            <Styles.Image source={heightImg} />
+          </Styles.IconBlock>
+        </Styles.InputBlock>
         <Styles.ImcPreview>
           IMC: <Strong>{imc ? imc : 'Preencha todos os valores'}</Strong>
         </Styles.ImcPreview>

@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Input = styled.TextInput`
   font-family: 'Ubuntu-Regular';
-  width: 48%;
+  width: 52%;
   margin: 6px 0;
   height: 45px;
   border-top-left-radius: 5px;

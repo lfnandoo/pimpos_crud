@@ -29,6 +29,10 @@ export const Form = styled.ScrollView`
   width: 100%;
 `;
 
+export const Label = styled.Text`
+  font-family: 'Ubuntu-Regular';
+`;
+
 export const TextInput = styled.TextInput`
   font-family: 'Ubuntu-Regular';
   width: 52%;
