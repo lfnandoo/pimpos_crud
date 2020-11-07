@@ -8,7 +8,6 @@ import Card from '../../components/Card';
 import Header from '../../components/Header';
 
 import * as Styles from './styles';
-import { Text } from '../../components/Card/styles';
 
 interface dataProps {
   name: string;
@@ -23,6 +22,7 @@ const Home: React.FC<dataProps> = () => {
   const isPageFocused = useIsFocused();
 
   const [childrenData, setChildrenData] = React.useState<dataProps[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (isPageFocused) {
@@ -31,6 +31,7 @@ const Home: React.FC<dataProps> = () => {
           const { data } = await api.get('childs.json');
 
           setChildrenData(data);
+          setIsLoading(false);
         } catch (e) {
           // tratar erros aq
           console.log(e);
@@ -51,6 +52,7 @@ const Home: React.FC<dataProps> = () => {
       </Styles.ActionsContainer>
 
       <Styles.MainContent>
+        <Styles.EmptyChild>{isLoading && 'Carregando...'}</Styles.EmptyChild>
         {childrenData ? (
           Object.keys(childrenData).map((key: any) => (
             <Card
@@ -63,7 +65,7 @@ const Home: React.FC<dataProps> = () => {
             />
           ))
         ) : (
-          <Text>adsdas</Text>
+          <Styles.EmptyChild>Nenhuma criança cadastrada.</Styles.EmptyChild>
         )}
       </Styles.MainContent>
     </Styles.Container>

@@ -41,3 +41,9 @@ export const MainContent = styled.ScrollView`
   margin: 10px auto;
   width: 100%;
 `;
+
+export const EmptyChild = styled.Text`
+  font-family: 'Ubuntu-Bold';
+  font-size: 22px;
+  text-align: center;
+`;
