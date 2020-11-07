@@ -32,15 +32,19 @@ const CreateChild: React.FC = () => {
   const navigation = useNavigation();
 
   React.useEffect(() => {
-    const heightParsed = height.replace(',', '.');
-    const newImc = (
-      Number(weight) /
-      (Number(heightParsed) * Number(heightParsed))
-    ).toString();
+    if (weight === '' || height === '') {
+      setImc(0);
+    } else {
+      const heightParsed = height.replace(',', '.');
+      const newImc = (
+        Number(weight) /
+        (Number(heightParsed) * Number(heightParsed))
+      ).toString();
 
-    const newImcParsed = Number(parseFloat(newImc).toFixed(2));
+      const newImcParsed = Number(parseFloat(newImc).toFixed(2));
 
-    setImc(newImcParsed);
+      setImc(newImcParsed);
+    }
   }, [weight, height]);
 
   const handleNavigationToHome = React.useCallback(() => {
@@ -154,7 +158,7 @@ const CreateChild: React.FC = () => {
           </Styles.InputBlock>
         </Styles.View>
         <Styles.ImcPreview>
-          IMC: <Strong>{imc ? imc : 'Preencha os valores'}</Strong>
+          IMC: <Strong>{imc ? imc : 'Preencha todos os valores'}</Strong>
         </Styles.ImcPreview>
         <Styles.SubmitButton onPress={handleSubmitNewChild}>
           <Styles.ButtonText>Criar</Styles.ButtonText>
