@@ -100,7 +100,7 @@ export const Image = styled.Image`
   opacity: 0.5;
 `;
 
-export const PreviewCalcs = styled.Text`
+export const ImcPreview = styled.Text`
   font-family: 'Ubuntu-Regular';
   color: rgba(0, 0, 0, 0.6);
   text-align: center;

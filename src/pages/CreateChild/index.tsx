@@ -32,15 +32,22 @@ const CreateChild: React.FC = () => {
   const navigation = useNavigation();
 
   React.useEffect(() => {
-    const newImc = (Number(weight) / Number(height)) * Number(height);
-    setImc(newImc);
+    const heightParsed = height.replace(',', '.');
+    const newImc = (
+      Number(weight) /
+      (Number(heightParsed) * Number(heightParsed))
+    ).toString();
+
+    const newImcParsed = Number(parseFloat(newImc).toFixed(2));
+
+    setImc(newImcParsed);
   }, [weight, height]);
 
   const handleNavigationToHome = React.useCallback(() => {
     navigation.navigate('Home');
   }, [navigation]);
 
-  const handleValidate = React.useCallback(() => {
+  const handleValidation = React.useCallback(() => {
     if (name === '' || weight === '' || height === '') {
       return ToastAndroid.show(
         'Preencha todas as informações!',
@@ -50,7 +57,7 @@ const CreateChild: React.FC = () => {
   }, [height, name, weight]);
 
   const handleSubmitNewChild = React.useCallback(async () => {
-    handleValidate();
+    handleValidation();
 
     try {
       await api.post('/childs.json', {
@@ -66,7 +73,7 @@ const CreateChild: React.FC = () => {
       // tratar erros aq
     }
   }, [
-    handleValidate,
+    handleValidation,
     name,
     birthDate,
     measuredDate,
@@ -146,12 +153,9 @@ const CreateChild: React.FC = () => {
             </Styles.IconBlock>
           </Styles.InputBlock>
         </Styles.View>
-        <Styles.PreviewCalcs>
-          IMC: <Strong>{imc ? imc : 'Preencha todos os valores'}</Strong>
-        </Styles.PreviewCalcs>
-        <Styles.PreviewCalcs>
-          Massa Cefálica: <Strong>{imc ? imc : 'Preencha os valores'}</Strong>
-        </Styles.PreviewCalcs>
+        <Styles.ImcPreview>
+          IMC: <Strong>{imc ? imc : 'Preencha os valores'}</Strong>
+        </Styles.ImcPreview>
         <Styles.SubmitButton onPress={handleSubmitNewChild}>
           <Styles.ButtonText>Criar</Styles.ButtonText>
         </Styles.SubmitButton>
