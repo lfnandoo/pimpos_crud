@@ -1,4 +1,5 @@
 import React from 'react';
+import { checkUnity } from '../../utils/checkUnity';
 import { customFormatDuration } from '../../utils/customFormatDuration';
 import { formatSimpleDate } from '../../utils/formatSimpleDate';
 
@@ -22,6 +23,19 @@ const Card: React.FC<CardDataProps> = ({
   height,
 }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
+  const [imc, setImc] = React.useState(0);
+
+  React.useEffect(() => {
+    const heightParsed = height.replace(',', '.');
+    const newImc = (
+      Number(weight) /
+      (Number(heightParsed) * Number(heightParsed))
+    ).toString();
+
+    const newImcParsed = Number(parseFloat(newImc).toFixed(2));
+
+    setImc(newImcParsed);
+  }, [height, weight]);
 
   return (
     <>
@@ -36,15 +50,38 @@ const Card: React.FC<CardDataProps> = ({
           <Styles.ModalContent>
             <Styles.NameText>{name}</Styles.NameText>
             <Styles.Text>
-              {customFormatDuration(new Date(birthDate))}
+              Idade:{' '}
+              <Styles.Strong>
+                {customFormatDuration(new Date(birthDate))}
+              </Styles.Strong>
             </Styles.Text>
             <Styles.Text>
-              {formatSimpleDate(new Date(measuredDate))}
+              Data Medida:{' '}
+              <Styles.Strong>
+                {formatSimpleDate(new Date(measuredDate))}
+              </Styles.Strong>
             </Styles.Text>
-            <Styles.Text>{cephalicPerimeter}</Styles.Text>
-            <Styles.Text>{weight} KILO</Styles.Text>
-            <Styles.Text>{height} metro</Styles.Text>
-            <Styles.Text>imc</Styles.Text>
+            <Styles.Text>
+              Perimetro Cefálico:{' '}
+              <Styles.Strong>
+                {cephalicPerimeter} {checkUnity(cephalicPerimeter) ? 'm' : 'cm'}
+              </Styles.Strong>
+            </Styles.Text>
+            <Styles.Text>
+              Peso:{' '}
+              <Styles.Strong>
+                {weight} {checkUnity(weight) ? 'kg' : 'g'}
+              </Styles.Strong>
+            </Styles.Text>
+            <Styles.Text>
+              Altura:{' '}
+              <Styles.Strong>
+                {height} {checkUnity(height) ? 'm' : 'cm'}
+              </Styles.Strong>
+            </Styles.Text>
+            <Styles.Text>
+              Imc: <Styles.Strong>{imc}</Styles.Strong>
+            </Styles.Text>
           </Styles.ModalContent>
         </Styles.View>
       </Styles.Modal>

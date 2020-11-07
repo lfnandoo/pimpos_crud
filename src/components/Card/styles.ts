@@ -13,7 +13,7 @@ export const Container = styled.TouchableOpacity`
 
 export const NameText = styled.Text`
   font-family: 'Ubuntu-Bold';
-  font-size: 16px;
+  font-size: 18px;
 `;
 
 export const CardInfos = styled.View`
@@ -23,8 +23,13 @@ export const CardInfos = styled.View`
 
 export const Text = styled.Text`
   font-family: 'Ubuntu-Regular';
-  opacity: 0.6;
+  color: rgba(0, 0, 0, 0.6);
   padding: 5px;
+`;
+
+export const Strong = styled.Text`
+  font-family: 'Ubuntu-Bold';
+  color: rgba(0, 0, 0, 0.8);
 `;
 
 export const Modal = styled.Modal``;
