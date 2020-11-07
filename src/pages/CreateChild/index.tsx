@@ -56,34 +56,40 @@ const CreateChild: React.FC = () => {
 
   const handleValidation = React.useCallback(() => {
     if (
-      name === '' ||
-      cephalicPerimeter === '' ||
-      weight === '' ||
-      height === ''
+      !!name &&
+      !!cephalicPerimeter &&
+      !!weight &&
+      !!height &&
+      !!birthDate &&
+      !!measuredDate
     ) {
-      return ToastAndroid.show(
-        'Preencha todas as informações!',
-        ToastAndroid.SHORT,
-      );
+      return true;
+    } else {
+      return false;
     }
-  }, [cephalicPerimeter, height, name, weight]);
+  }, [birthDate, cephalicPerimeter, height, measuredDate, name, weight]);
 
   const handleSubmitNewChild = React.useCallback(async () => {
-    handleValidation();
+    const isValid = handleValidation();
 
-    try {
-      await api.post('/childs.json', {
-        name,
-        birthdate: birthDate,
-        measured_date: measuredDate,
-        cephalic_perimeter: cephalicPerimeter,
-        weight,
-        height,
-      });
+    if (isValid) {
+      try {
+        await api.post('/childs.json', {
+          name,
+          birthdate: birthDate,
+          measured_date: measuredDate,
+          cephalic_perimeter: cephalicPerimeter,
+          weight,
+          height,
+        });
 
-      handleNavigationToHome();
-    } catch (e) {
-      // tratar erros aq
+        handleNavigationToHome();
+        ToastAndroid.show('Nova criança criada!', ToastAndroid.SHORT);
+      } catch (e) {
+        // tratar erros aq
+      }
+    } else {
+      ToastAndroid.show('Preencha todas as informações!', ToastAndroid.SHORT);
     }
   }, [
     handleValidation,
