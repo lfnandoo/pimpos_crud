@@ -1,8 +1,9 @@
 import React from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+import { formatSimpleDate } from '../../utils';
+
 import * as Styles from './styles';
-import { formatSimpleDate } from '../../utils/formatSimpleDate';
 
 interface DatePickerInputProps {
   setShowDatePicker: React.Dispatch<React.SetStateAction<boolean>>;

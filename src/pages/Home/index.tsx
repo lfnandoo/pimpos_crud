@@ -4,8 +4,7 @@ import api from '../../services/api';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import Card from '../../components/Card';
-import Header from '../../components/Header';
+import { Card, Header } from '../../components';
 
 import * as Styles from './styles';
 

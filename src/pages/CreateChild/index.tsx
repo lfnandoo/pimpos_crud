@@ -1,20 +1,19 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { ToastAndroid } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 import api from '../../services/api';
 
-import Icon from 'react-native-vector-icons/Feather';
+import { Header, DatePickerInput, DecimalInput } from '../../components';
 
-import Header from '../../components/Header';
-import DatePickerInput from '../../components/DatePickerInput';
-import DecimalInput from '../../components/DecimalInput';
-
-import brainImg from '../../assets/brainstorm.png';
-import heightImg from '../../assets/height.png';
-import kgImg from '../../assets/kg.png';
-import calendarImg from '../../assets/birthdate.png';
-import birthdateImg from '../../assets/calendar.png';
-import nameImg from '../../assets/name.png';
+import {
+  brainImg,
+  heightImg,
+  kgImg,
+  calendarImg,
+  birthdateImg,
+  nameImg,
+} from '../../assets';
 
 import { Strong } from '../../components/DatePickerInput/styles';
 import * as Styles from './styles';

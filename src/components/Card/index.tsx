@@ -1,14 +1,16 @@
 import React from 'react';
-import { checkUnity } from '../../utils/checkUnity';
-import { customFormatDuration } from '../../utils/customFormatDuration';
-import { formatSimpleDate } from '../../utils/formatSimpleDate';
 import { ToastAndroid } from 'react-native';
+import api from '../../services/api';
 
-import editImg from '../../assets/edit-list.png';
-import deleteImg from '../../assets/delete-list.png';
+import {
+  checkUnity,
+  customFormatDuration,
+  formatSimpleDate,
+} from '../../utils';
+
+import { editImg, deleteImg } from '../../assets';
 
 import * as Styles from './styles';
-import api from '../../services/api';
 
 interface CardDataProps {
   cardKey: string;
