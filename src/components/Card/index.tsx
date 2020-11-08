@@ -11,6 +11,7 @@ import {
 import { editImg, deleteImg } from '../../assets';
 
 import * as Styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 interface CardDataProps {
   cardKey: string;
@@ -36,6 +37,8 @@ const Card: React.FC<CardDataProps> = ({
   const [modalVisible, setModalVisible] = React.useState(false);
   const [imc, setImc] = React.useState(0);
 
+  const navigation = useNavigation();
+
   React.useEffect(() => {
     const heightParsed = height.replace(',', '.');
     const newImc = (
@@ -51,6 +54,11 @@ const Card: React.FC<CardDataProps> = ({
   const openOrCloseModal = React.useCallback(() => {
     setModalVisible((state) => !state);
   }, []);
+
+  const handleEditCard = React.useCallback(() => {
+    openOrCloseModal();
+    navigation.navigate('EditChild', { cardKey });
+  }, [cardKey, navigation, openOrCloseModal]);
 
   const handleDeleteCard = React.useCallback(async () => {
     try {
@@ -114,7 +122,7 @@ const Card: React.FC<CardDataProps> = ({
               </Styles.Text>
             </Styles.InfosContainer>
             <Styles.ActionsContainer>
-              <Styles.Button>
+              <Styles.Button onPress={handleEditCard}>
                 <Styles.Image source={editImg} />
               </Styles.Button>
               <Styles.Button onPress={handleDeleteCard}>
