@@ -8,6 +8,7 @@ import editImg from '../../assets/edit-list.png';
 import deleteImg from '../../assets/delete-list.png';
 
 import * as Styles from './styles';
+import api from '../../services/api';
 
 interface CardDataProps {
   cardKey: string;
@@ -48,18 +49,18 @@ const Card: React.FC<CardDataProps> = ({
   }, []);
 
   const handleDeleteCard = React.useCallback(async () => {
-    ToastAndroid.show(
-      'Desculpe, esse serviço ainda não está disponível.',
-      ToastAndroid.BOTTOM,
-    );
-    openOrCloseModal();
-
     try {
-      // await api.delete('/childs.json', cardKey);
+      await api.delete(`/childs/${cardKey}.json`);
+
+      ToastAndroid.show(
+        `${name} deletado(a) do nosso banco de dados.`,
+        ToastAndroid.BOTTOM,
+      );
+      openOrCloseModal();
     } catch (e) {
       console.log(e);
     }
-  }, [openOrCloseModal]);
+  }, [cardKey, name, openOrCloseModal]);
 
   return (
     <>
