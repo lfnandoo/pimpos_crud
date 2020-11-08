@@ -46,9 +46,26 @@ export const ModalContent = styled.View`
   padding: 20px;
   border-radius: 5px;
   width: 70%;
-  height: 30%;
+  height: 40%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 
-  background-color: #f9c112;
+  background-color: rgba(38, 173, 191, 1);
+`;
+
+export const InfosContainer = styled.View`
+  align-items: center;
+`;
+
+export const ActionsContainer = styled.View`
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+`;
+
+export const Button = styled.TouchableOpacity``;
+
+export const Image = styled.Image`
+  width: 30px;
+  height: 30px;
 `;

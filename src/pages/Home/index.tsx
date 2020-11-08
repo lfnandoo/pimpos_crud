@@ -58,6 +58,7 @@ const Home: React.FC<dataProps> = () => {
           Object.keys(childrenData).map((key: any) => (
             <Card
               key={key}
+              cardKey={key}
               name={childrenData[key].name}
               birthDate={childrenData[key].birthdate}
               cephalicPerimeter={childrenData[key].cephalic_perimeter}
