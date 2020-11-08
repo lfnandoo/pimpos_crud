@@ -116,7 +116,7 @@ const EditChild: React.FC<EditChildProps> = ({ route }) => {
 
     if (isValid) {
       try {
-        await api.post('/childs.json', {
+        await api.put(`/childs/${cardKey}.json`, {
           name,
           birthdate: birthDate,
           measured_date: measuredDate,
@@ -138,6 +138,7 @@ const EditChild: React.FC<EditChildProps> = ({ route }) => {
     }
   }, [
     handleValidation,
+    cardKey,
     name,
     birthDate,
     measuredDate,
