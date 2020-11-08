@@ -24,9 +24,10 @@ const Home: React.FC<dataProps> = () => {
 
   const [childrenData, setChildrenData] = React.useState<dataProps[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [reload, setReload] = React.useState(false);
 
   React.useEffect(() => {
-    if (isPageFocused) {
+    if (isPageFocused || reload) {
       (async () => {
         try {
           const { data } = await api.get('childs.json');
@@ -39,7 +40,7 @@ const Home: React.FC<dataProps> = () => {
         }
       })();
     }
-  }, [isPageFocused]);
+  }, [isPageFocused, reload]);
 
   return (
     <Styles.Container>
@@ -65,6 +66,7 @@ const Home: React.FC<dataProps> = () => {
               measuredDate={childrenData[key].measured_date}
               weight={childrenData[key].weight}
               height={childrenData[key].height}
+              reloadPage={setReload}
             />
           ))
         ) : (

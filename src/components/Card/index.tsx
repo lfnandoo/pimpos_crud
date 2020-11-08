@@ -18,6 +18,7 @@ interface CardDataProps {
   cephalicPerimeter: string;
   weight: string;
   height: string;
+  reloadPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Card: React.FC<CardDataProps> = ({
@@ -28,6 +29,7 @@ const Card: React.FC<CardDataProps> = ({
   cephalicPerimeter,
   weight,
   height,
+  reloadPage,
 }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const [imc, setImc] = React.useState(0);
@@ -56,11 +58,12 @@ const Card: React.FC<CardDataProps> = ({
         `${name} deletado(a) do nosso banco de dados.`,
         ToastAndroid.BOTTOM,
       );
-      openOrCloseModal();
+
+      reloadPage((state) => !state);
     } catch (e) {
       console.log(e);
     }
-  }, [cardKey, name, openOrCloseModal]);
+  }, [cardKey, name, reloadPage]);
 
   return (
     <>
