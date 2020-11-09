@@ -56,7 +56,7 @@ Pimpos Challenge's.
   Low Quality
   <img alt="Demo" src="./.github/demo.gif" width="100%">
   
-  Full Quality
+  High Quality
   <img alt="Demo" src="./.github/full_quality.mkv.gif" width="100%">
 </p>
 ---
