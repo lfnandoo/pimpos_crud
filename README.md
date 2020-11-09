@@ -53,8 +53,11 @@ Pimpos Challenge's.
 ## 🔖 Layout
 
 <p align="">
-  <img alt="Demo" src="./.gihub/demo.gif" width="100%">
+  Low Quality
+  <img alt="Demo" src="./.github/demo.gif" width="100%">
   
+  Full Quality
+  <img alt="Demo" src="./.github/full_quality.mkv.gif" width="100%">
 </p>
 ---
 
