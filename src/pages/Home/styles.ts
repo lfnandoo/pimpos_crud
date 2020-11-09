@@ -8,37 +8,26 @@ export const Container = styled.View`
 
 export const Button = styled.TouchableOpacity`
   height: 45px;
+  width: 50%;
   align-items: center;
   justify-content: center;
   padding: 15px;
+  margin: 10px auto;
 
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-radius: 5px;
 
   background-color: rgba(232, 37, 131, 1);
 `;
 
-export const ActionsContainer = styled.View`
-  height: 10%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-`;
-
-export const TextInput = styled.TextInput`
-  font-family: 'Ubuntu-Regular';
-  width: 60%;
-  height: 45px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  padding: 15px;
-
-  background-color: #fff;
+export const ButtonText = styled.Text`
+  font-family: 'Ubuntu-Bold';
+  font-size: 18px;
+  color: #fff;
 `;
 
 export const MainContent = styled.ScrollView`
   flex: 1;
-  margin: 10px auto;
+  margin: 5px auto;
   width: 100%;
 `;
 

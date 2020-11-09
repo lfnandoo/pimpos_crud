@@ -2,8 +2,6 @@ import React from 'react';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import api from '../../services/api';
 
-import Icon from 'react-native-vector-icons/Feather';
-
 import { Card, Header } from '../../components';
 
 import * as Styles from './styles';
@@ -35,7 +33,6 @@ const Home: React.FC<dataProps> = () => {
           setIsLoading(false);
         } catch (e) {
           // tratar erros aq
-          console.log(e);
         }
       })();
     }
@@ -45,13 +42,9 @@ const Home: React.FC<dataProps> = () => {
     <Styles.Container>
       <Header />
 
-      <Styles.ActionsContainer>
-        <Styles.TextInput placeholder="Pesquisar" />
-        <Styles.Button onPress={() => navigation.navigate('CreateChild')}>
-          <Icon name="plus" size={20} color="#FFF" />
-        </Styles.Button>
-      </Styles.ActionsContainer>
-
+      <Styles.Button onPress={() => navigation.navigate('CreateChild')}>
+        <Styles.ButtonText>Criar Criança</Styles.ButtonText>
+      </Styles.Button>
       <Styles.MainContent>
         <Styles.EmptyChild>{isLoading && 'Carregando...'}</Styles.EmptyChild>
         {childrenData ? (
