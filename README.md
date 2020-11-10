@@ -17,7 +17,7 @@
 
 Project made with:
 
-- React
+- React Native
 - Typescript
 - Axios
 - Styled Components
